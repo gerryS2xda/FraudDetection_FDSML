@@ -32,11 +32,11 @@ plt.title("type")
 print("Statistiche delle categorie")
 print(fraudata["type"].value_counts())
 plt.figure(3)
-print('Istogramma isFraud:')
+
 fraudata["isFraud"].hist(bins=50,figsize=(10,5))#bins e' il numero di valori differenti
 plt.title("isFraud")
 plt.figure(4)
-print('Istogramma isFlaggedFraud')
+
 fraudata["isFlaggedFraud"].hist(bins=50,figsize=(10,5))#bins e' il numero di valori differenti
 plt.title("isFlaggedFraud")
 plt.show()
@@ -48,6 +48,10 @@ print("TF/TD e TN/TD  sul train_set")
 print(train_set["isFraud"].value_counts() / len(train_set))
 print("TF/TD e TN/TD  sul test_set")
 print(test_set["isFraud"].value_counts() / len(test_set))
-
+correlation_ma=fraudata.corr()
+print("Correlazione:isFraud")
+print(correlation_ma["isFraud"].sort_values(ascending=False)) #isFraud è molto correlato con amount e isFlaggedFraud
+print("Correlazione:isFlaggedFraud")
+print(correlation_ma["isFlaggedFraud"].sort_values(ascending=False)) #isFlaggedFraud è molto correlato con isFraud
 
 
