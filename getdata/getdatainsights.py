@@ -1,6 +1,6 @@
 from getdata import fetchdata
 from matplotlib import pyplot as plt
-from getdata import createstratifiedtestset
+from datapreparation import createstratifiedtestset
 import pandas as pd
 import numpy as np
 
@@ -41,7 +41,7 @@ fraudata["isFlaggedFraud"].hist(bins=50,figsize=(10,5))#bins e' il numero di val
 plt.title("isFlaggedFraud")
 plt.show()
 print("Creo test set stratificato")
-train_set,test_set=createstratifiedtestset.stratified_test_fraud_data()
+train_set,test_set= createstratifiedtestset.stratified_test_fraud_data()
 print("TF/TD e TN/TD sull'intero ds")
 print(fraudata["isFraud"].value_counts() / len(fraudata))
 print("TF/TD e TN/TD  sul train_set")
