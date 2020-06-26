@@ -40,14 +40,9 @@ plt.figure(4)
 fraudata["isFlaggedFraud"].hist(bins=50,figsize=(10,5))#bins e' il numero di valori differenti
 plt.title("isFlaggedFraud")
 plt.show()
-print("Creo test set stratificato")
-train_set,test_set= createstratifiedtestset.stratified_test_fraud_data()
-print("TF/TD e TN/TD sull'intero ds")
-print(fraudata["isFraud"].value_counts() / len(fraudata))
-print("TF/TD e TN/TD  sul train_set")
-print(train_set["isFraud"].value_counts() / len(train_set))
-print("TF/TD e TN/TD  sul test_set")
-print(test_set["isFraud"].value_counts() / len(test_set))
+
+
+
 correlation_ma=fraudata.corr()
 print("Correlazione:isFraud")
 print(correlation_ma["isFraud"].sort_values(ascending=False)) #isFraud è molto correlato con amount e isFlaggedFraud
