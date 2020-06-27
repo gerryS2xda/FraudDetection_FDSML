@@ -1,0 +1,3 @@
+from datapreparation import preparetraintest
+
+train_set_preparate,test_set,train_set_labels1,train_set_labels2=preparetraintest.prepared_fraud_data()
