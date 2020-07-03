@@ -7,6 +7,7 @@ from sklearn.metrics import auc
 from visualizationresult import visualizeconfusionmatrix
 from visualizationresult import visualizeROC
 
+
 train_set_preparate,test_set,train_set_labels1,train_set_labels2=preparetraintest.prepared_fraud_data()
 train_p=train_set_preparate
 train_l= train_set_labels1
@@ -16,7 +17,7 @@ test_set_predictive=test_set.drop(["type","nameOrig","nameDest",'isFraud','isFla
 #training svc kernel linear
 
 
-clf = svm.SVC(kernel='linear', C=5,probability=True) #SVC = classificatore SVM
+clf = svm.SVC(kernel='linear', C=5,probability=True,random_state=42) #SVC = classificatore SVM
 proba1=clf.fit(train_p, train_l) #X (attr. predittivi - dati training), y valori attr. dipendenti
 
 #roc curve svc kernel lineare
@@ -49,7 +50,7 @@ print(report)
 
 #training svc kernel non linear
 
-clf1 = svm.SVC(kernel="poly", degree=5, coef0=1, C=5,probability=True) #SVC = classificatore SVM
+clf1 = svm.SVC(kernel="poly", degree=5, coef0=1, C=5,probability=True,random_state=42) #SVC = classificatore SVM
 proba2=clf1.fit(train_p, train_l)
 
 
