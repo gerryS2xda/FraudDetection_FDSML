@@ -43,10 +43,10 @@ plt.show()
 
 
 
-correlation_ma=fraudata.corr()
+'''correlation_ma=fraudata.corr()
 print("Correlazione:isFraud")
 print(correlation_ma["isFraud"].sort_values(ascending=False)) #isFraud è molto correlato con amount e isFlaggedFraud
 print("Correlazione:isFlaggedFraud")
 print(correlation_ma["isFlaggedFraud"].sort_values(ascending=False)) #isFlaggedFraud è molto correlato con isFraud
-
+'''
 
