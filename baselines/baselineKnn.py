@@ -2,17 +2,15 @@ from getdata import fetchdata
 from datapreparation import createstratifiedtestset
 from visualizationresult import visualizeROC,visualizeconfusionmatrix
 
-from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 
 import matplotlib.pyplot as plt
-from sklearn.tree import export_graphviz
 
 
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import learning_curve
-from sklearn.metrics import mean_squared_error
 
 fraudata = fetchdata.load_fraud_data()
 train_set,test_set = createstratifiedtestset.stratified_test_fraud_data()
@@ -22,21 +20,16 @@ train_set_predictive=train_set.drop(['type',"nameOrig","nameDest",'isFraud','isF
 
 test_set_labels1 = test_set["isFraud"].copy()
 test_set_predictive=test_set.drop(['type',"nameOrig","nameDest",'isFraud','isFlaggedFraud'],axis=1)
-tree_clf = DecisionTreeClassifier(max_depth=3,random_state=42)
-decision_tree_trained=tree_clf.fit(train_set_predictive, train_set_labels1)
-
-export_graphviz(tree_clf, out_file="decisiontree1.dot",
-    feature_names=['step','amount','oldbalanceOrg','newbalanceOrg','oldbalanceDest','newbalanceDest'],
-    class_names=['0','1'],
-    rounded=True, filled=True
-)
+knn_clf=KNeighborsClassifier(n_neighbors=3, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='euclidean', n_jobs=-1)
+knn_trained=knn_clf.fit(train_set_predictive, train_set_labels1)
 
 
 
-visualizeROC.create_roc_curve1(decision_tree_trained,test_set_predictive,test_set_labels1)
+
+visualizeROC.create_roc_curve1(knn_trained,test_set_predictive,test_set_labels1)
 
 
-y_pred = tree_clf.predict(test_set_predictive)
+y_pred = knn_clf.predict(test_set_predictive)
 print(y_pred)
 
 print("accuracy:")
@@ -45,9 +38,9 @@ report=classification_report(y_pred, test_set_labels1)
 print("Report:")
 print(report)
 
-visualizeconfusionmatrix.confusion_matrix1(tree_clf,test_set_predictive,test_set_labels1,"Decision Tree")
+visualizeconfusionmatrix.confusion_matrix1(knn_clf,test_set_predictive,test_set_labels1,"KNN")
 
-train_sizes, train_scores, test_scores = learning_curve(tree_clf,
+train_sizes, train_scores, test_scores = learning_curve(knn_clf,
                                                         train_set_predictive,
                                                         train_set_labels1,
                                                         # Number of folds in cross-validatio
