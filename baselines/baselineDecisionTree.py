@@ -47,37 +47,3 @@ print(report)
 
 visualizeconfusionmatrix.confusion_matrix1(tree_clf,test_set_predictive,test_set_labels1,"Decision Tree")
 
-train_sizes, train_scores, test_scores = learning_curve(tree_clf,
-                                                        train_set_predictive,
-                                                        train_set_labels1,
-                                                        # Number of folds in cross-validatio
-                                                        # Evaluation metric
-                                                        cv=2,
-                                                        scoring='accuracy',
-                                                        # Use all computer cores
-                                                        shuffle=True,
-                                                        n_jobs=-1,
-                                                        random_state=42,
-                                                        # 50 different sizes of the training s
-                                                        train_sizes=np.linspace(0.01, 1.0,1000))
-# Create means and standard deviations of training set scores
-train_mean = np.mean(train_scores, axis=1)
-train_std = np.std(train_scores, axis=1)
-
-# Create means and standard deviations of test set scores
-test_mean = np.mean(test_scores, axis=1)
-test_std = np.std(test_scores, axis=1)
-
-# Draw lines
-plt.plot(train_sizes, train_mean, '--', color="#111111",  label="Training score")
-plt.plot(train_sizes, test_mean, color="#111111", label="Cross-validation score")
-
-# Draw bands
-plt.fill_between(train_sizes, train_mean - train_std, train_mean + train_std, color="#DDDDDD")
-plt.fill_between(train_sizes, test_mean - test_std, test_mean + test_std, color="#DDDDDD")
-
-# Create plot
-plt.title("Learning Curve")
-plt.xlabel("Training Set Size"), plt.ylabel("Accuracy Score"), plt.legend(loc="best")
-plt.tight_layout()
-plt.show()
