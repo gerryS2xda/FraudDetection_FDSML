@@ -1,6 +1,5 @@
 from datapreparation import createstratifiedtestset
-from sklearn.preprocessing import OneHotEncoder
-from sklearn.preprocessing import LabelEncoder
+
 from sklearn.preprocessing import StandardScaler
 from sklearn.pipeline import Pipeline
 from getdata import fetchdata
@@ -10,9 +9,10 @@ def prepared_fraud_data():
     print("Creo test set stratificato")
     train_set,test_set = createstratifiedtestset.stratified_test_fraud_data()
     train_set_labels1 = train_set["isFraud"].copy()
-    train_set_labels2= train_set["isFlaggedFraud"].copy()
-    train_set_predictive=train_set.drop(['isFraud','isFlaggedFraud'],axis=1)
-    print("Training set stratificato:")
+    test_set_labels1= test_set["isFraud"].copy()
+    train_set_predictive = train_set.drop(["type", "nameOrig", "nameDest", 'isFraud', 'isFlaggedFraud', 'newbalanceOrig', 'step', 'oldbalanceDest'],axis=1)
+    test_set_predictive = test_set.drop( ["type", "nameOrig", "nameDest", 'isFraud', 'isFlaggedFraud', 'newbalanceOrig', 'step', 'oldbalanceDest'],axis=1)
+    print("Training set stratificato dopo feature selection:")
     print(train_set_predictive)
     print("TF/TD e TN/TD sull'intero ds") #TF->tuple Fraud ,TD->tuple ds,TN->tuple notFraud
     print(fraudata["isFraud"].value_counts() / len(fraudata))
@@ -20,16 +20,10 @@ def prepared_fraud_data():
     print(train_set["isFraud"].value_counts() / len(train_set))
     print("TF/TD e TN/TD  sul test_set")
     print(test_set["isFraud"].value_counts() / len(test_set))
-    train_set_predictive=train_set_predictive.drop(["type","nameOrig","nameDest"],axis=1)
     num_pipeline = Pipeline([('std_scaler', StandardScaler())])
     train_set_preparate = num_pipeline.fit_transform(train_set_predictive)
+    num_pipeline = Pipeline([('std_scaler', StandardScaler())])
+    test_set_preparate = num_pipeline.fit_transform(test_set_predictive)
 
-    return train_set_preparate,test_set,train_set_labels1,train_set_labels2
+    return train_set_preparate,test_set_preparate,train_set_labels1,test_set_labels1
 
-'''encoder = LabelEncoder()
-train_set_cat=train_set_copy["type"]
-train_set_cat_encoded = encoder.fit_transform(train_set_cat)
-encoder1 = OneHotEncoder()
-train_set_cat1 = encoder1.fit_transform(train_set_cat_encoded.reshape(-1,1))
-print(train_set_cat1)
-'''

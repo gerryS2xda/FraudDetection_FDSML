@@ -25,7 +25,7 @@ test_set_predictive=test_set.drop(['type',"nameOrig","nameDest",'isFraud','isFla
 tree_clf = DecisionTreeClassifier(max_depth=3,random_state=42)
 decision_tree_trained=tree_clf.fit(train_set_predictive, train_set_labels1)
 
-export_graphviz(tree_clf, out_file="decisiontree1.dot",
+export_graphviz(tree_clf, out_file="decisiontreebaseline.dot",
     feature_names=['step','amount','oldbalanceOrg','newbalanceOrg','oldbalanceDest','newbalanceDest'],
     class_names=['0','1'],
     rounded=True, filled=True
