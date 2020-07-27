@@ -1,12 +1,9 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.ensemble import RandomForestClassifier
+from datapreparation import createstratifiedtestsetresampled
 
-from datapreparation import createstratifiedtestset
-from getdata import fetchdata
-
-fraudata = fetchdata.load_fraud_data()
-train_set,test_set = createstratifiedtestset.stratified_test_fraud_data()
+train_set,test_set = createstratifiedtestsetresampled.stratified_test_fraud_data()
 
 train_set_labels1 = train_set["isFraud"].copy()
 train_set_predictive=train_set.drop(['type',"nameOrig","nameDest",'isFraud','isFlaggedFraud'],axis=1)
