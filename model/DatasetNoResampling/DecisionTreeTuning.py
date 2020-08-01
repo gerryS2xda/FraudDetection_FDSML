@@ -8,11 +8,11 @@ train_set,test_set,train_labels,test_labels=preparetraintest.prepared_fraud_data
 tree_clf = DecisionTreeClassifier(max_depth=4,random_state=42,min_samples_leaf= 100)
 decision_tree_trained=tree_clf.fit(train_set, train_labels)
 
-export_graphviz(tree_clf, out_file="decisiontreetuning.dot",
-    feature_names=['amount','oldbalanceOrg','newbalanceDest'],
-    class_names=['0','1'],
-    rounded=True, filled=True
-)
+export_graphviz(tree_clf, out_file="decisiontreetuning.dot.pdf",
+                feature_names=['amount','oldbalanceOrg','newbalanceDest'],
+                class_names=['0','1'],
+                rounded=True, filled=True
+                )
 
 
 
