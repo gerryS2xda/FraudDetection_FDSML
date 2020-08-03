@@ -1,18 +1,12 @@
+"""Baseline Decision Tree"""
 from getdata import fetchdata
 from datapreparation import createstratifiedtestset
 from visualizationresult import visualizeROC,visualizeconfusionmatrix
-
 from sklearn.tree import DecisionTreeClassifier
-import numpy as np
-
-import matplotlib.pyplot as plt
 from sklearn.tree import export_graphviz
-
-
 from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import learning_curve
-from sklearn.metrics import mean_squared_error
+
 
 fraudata = fetchdata.load_fraud_data()
 train_set,test_set = createstratifiedtestset.stratified_test_fraud_data()
@@ -22,6 +16,7 @@ train_set_predictive=train_set.drop(['type',"nameOrig","nameDest",'isFraud','isF
 
 test_set_labels1 = test_set["isFraud"].copy()
 test_set_predictive=test_set.drop(['type',"nameOrig","nameDest",'isFraud','isFlaggedFraud'],axis=1)
+# Definizione del Decision Tree Classifier
 tree_clf = DecisionTreeClassifier(max_depth=3,random_state=42)
 decision_tree_trained=tree_clf.fit(train_set_predictive, train_set_labels1)
 
@@ -31,8 +26,11 @@ export_graphviz(tree_clf, out_file="decisiontreebaseline.dot",
     rounded=True, filled=True
 )
 
+path = 'decisiontreebaseline.dot'
+s = Source.from_file(path)
+s.view()
 
-
+# Creazione della ROC Curve
 visualizeROC.create_roc_curve1(decision_tree_trained,test_set_predictive,test_set_labels1)
 
 
@@ -45,5 +43,6 @@ report=classification_report(y_pred, test_set_labels1)
 print("Report:")
 print(report)
 
+# Creazione della Confusion Matrix
 visualizeconfusionmatrix.confusion_matrix1(tree_clf,test_set_predictive,test_set_labels1,"Decision Tree")
 

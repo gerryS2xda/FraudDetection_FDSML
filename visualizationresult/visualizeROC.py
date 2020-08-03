@@ -1,8 +1,9 @@
+""" Creazione della ROC Curve"""
 from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
 import matplotlib.pyplot as plt
 
-#Funzione che plotta la ROC Curve
+# Funzione che plotta la ROC Curve
 def create_roc_curve1(trainedclassifier,test_set,test_set_labels):
     predizioni1 = trainedclassifier.predict_proba(test_set)
     fpr, tpr, thresholds = roc_curve(test_set_labels, predizioni1[:, 1])

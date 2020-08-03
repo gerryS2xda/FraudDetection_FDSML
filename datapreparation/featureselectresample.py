@@ -11,7 +11,7 @@ train_set_predictive=train_set.drop(['type',"nameOrig","nameDest",'isFraud','isF
 
 test_set_labels1 = test_set["isFraud"].copy()
 test_set_predictive=test_set.drop(['type',"nameOrig","nameDest",'isFraud','isFlaggedFraud'],axis=1)
-# Define Random Forest Classifier
+# Definizione del Random Forest Classifier
 rnd_clf = RandomForestClassifier(n_estimators=100, n_jobs=-1, random_state=42)
 # Training
 rnd_clf.fit(train_set_predictive, train_set_labels1)

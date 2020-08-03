@@ -1,8 +1,9 @@
+"""Esclusione di feature non selezionate e standardizzazione dei dati in relazione al dataset originale"""
 from datapreparation import createstratifiedtestset
 
 from sklearn.preprocessing import StandardScaler
 
-
+# Funzione che prepara i dati per il training e il testing di modelli
 def prepared_fraud_data():
     print("Creo test set stratificato")
     train_set,test_set = createstratifiedtestset.stratified_test_fraud_data()
