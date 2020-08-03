@@ -9,6 +9,7 @@ def create_roc_curve1(trainedclassifier,test_set,test_set_labels):
     fpr, tpr, thresholds = roc_curve(test_set_labels, predizioni1[:, 1])
     roc_auc = auc(fpr, tpr)
     print("Area under the ROC curve : %f" % roc_auc)
+    plt.figure(1)
     plt.title('Receiver Operating Characteristic')
     plt.plot(fpr, tpr, 'b', label='AUC = %0.2f' % roc_auc)
     plt.legend(loc='lower right')
