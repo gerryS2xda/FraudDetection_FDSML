@@ -4,9 +4,7 @@ from matplotlib import pyplot as plt
 import pandas as pd
 import numpy as np
 
-
 # Caricamento dei dati
-print('Caricamento dei dati...')
 fraudata = fetchdata.load_fraud_data()
 
 # Data profiling rapido

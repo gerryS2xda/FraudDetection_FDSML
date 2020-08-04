@@ -10,3 +10,4 @@ def resamplingDataset():
     df_1_over = resample(fraudata[fraudata["isFraud"] == 1], n_samples=3000000, random_state=42)
     df_resampled = pd.concat([df_class_0_under, df_1_over], axis=0)
     return df_resampled
+

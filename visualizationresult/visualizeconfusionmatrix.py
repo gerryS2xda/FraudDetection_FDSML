@@ -12,5 +12,9 @@ def confusion_matrix1(clf,test_set,test_labels,name):  #name= nome del classific
         disp.ax_.set_title(title)
         print(title)
         print(disp.confusion_matrix)
+        plt.figure(2)
         plt.show()
+
+
+
 

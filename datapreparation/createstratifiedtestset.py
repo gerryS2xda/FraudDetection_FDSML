@@ -5,6 +5,7 @@ from getdata import fetchdata
 # Funzione che crea un training set e un test set stratificati
 def stratified_test_fraud_data():
     fraudata = fetchdata.load_fraud_data()
+    print("Creazione training/test set stratificato...")
     split = StratifiedShuffleSplit(n_splits=1, test_size=0.3, random_state=42)
     for train_index, test_index in split.split(fraudata, fraudata["isFraud"]):
         strat_train_set = fraudata.loc[train_index]

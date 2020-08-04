@@ -6,8 +6,6 @@ from sklearn.metrics import classification_report
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
 
-
-fraudata = fetchdata.load_fraud_data()
 train_set,test_set = createstratifiedtestset.stratified_test_fraud_data()
 
 train_set_labels1 = train_set["isFraud"].copy()
@@ -22,7 +20,7 @@ knn_trained=knn_clf.fit(train_set_predictive, train_set_labels1)
 
 
 # Creazione della ROC Curve
-visualizeROC.create_roc_curve1(knn_trained,test_set_predictive,test_set_labels1)
+visualizeROC.create_roc_curve1(knn_trained, test_set_predictive, test_set_labels1)
 
 
 y_pred = knn_clf.predict(test_set_predictive)
@@ -35,5 +33,6 @@ print("Report:")
 print(report)
 
 # Creazione della Confusion Matrix
-visualizeconfusionmatrix.confusion_matrix1(knn_clf,test_set_predictive,test_set_labels1,"KNN")
+visualizeconfusionmatrix.confusion_matrix1(knn_clf, test_set_predictive, test_set_labels1, "KNN")
+
 
